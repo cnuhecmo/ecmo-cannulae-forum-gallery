@@ -113,9 +113,12 @@
     font-size:clamp(2.4rem, 5.4vw, 4.3rem);
     line-height:1.04;
     color:var(--navy-900);
-    max-width:18ch;
+    max-width:none;
   }
-  .hero-title .accent{color:var(--orange-600);}
+  .hero-title span{display:block;}
+  .hero-title .l1{color:var(--grey-600);}
+  .hero-title .l2{color:#e95e38;}
+  .hero-title .l3{color:#101d47;}
   .hero-kicker{
     margin-top:22px;
     font-size:1.08rem;
@@ -123,7 +126,17 @@
     max-width:46ch;
     line-height:1.6;
   }
-  @media (max-width:640px){ .hero{padding:72px 0 64px;} .blob.b1{width:360px;height:360px;top:-140px;right:-160px;} .blob.b2{width:280px;height:280px;bottom:-200px;left:-150px;} }
+  @media (max-width:640px){
+    .hero{padding:110px 0 100px;}
+    .blob.b1{width:300px;height:300px;top:-205px;right:-110px;}
+    .blob.b2{width:300px;height:300px;bottom:-250px;left:-140px;}
+    .hero-title{font-size:2.15rem;}
+    .hero-kicker{font-size:1rem;margin-top:18px;}
+  }
+  @media (max-width:400px){
+    .nav .mark{font-size:0.86rem;gap:7px;}
+    .nav .mark svg{width:21px;height:21px;}
+  }
 
   /* ---------- session strip ---------- */
   .sessions{
@@ -343,7 +356,7 @@
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>2026년 9월 12일</span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Holiday Inn Hongdae</span>
     </div>
-    <h1 class="hero-title">Global Forum on <span class="accent">Next-Generation</span> ECMO Cannulae</h1>
+    <h1 class="hero-title"><span class="l1">Global Forum on</span><span class="l2">Next-Generation</span><span class="l3">ECMO Cannulae</span></h1>
     <p class="hero-kicker">범부처 연구개발과제 · 차세대 ECMO 캐뉼라 개발을 위한 국제 포럼의 순간들을 기록한 갤러리입니다.</p>
   </div>
 </section>
