@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Forum on Next-Generation ECMO Cannulae — 행사 갤러리</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<style>
+  :root{
+    --navy-900:#101d47;
+    --navy-700:#1c2e6b;
+    --navy-500:#31428c;
+    --orange-600:#e8552d;
+    --orange-400:#f2895f;
+    --orange-100:#fce6dc;
+    --cream:#f4f2ee;
+    --paper:#fbfaf8;
+    --ink:#171c2c;
+    --grey-600:#5b6072;
+    --grey-300:#d9d7d1;
+    --line:#e4e1da;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family:'Baloo 2', 'Pretendard', sans-serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  a{color:inherit;}
+  img{display:block;max-width:100%;}
+
+  /* ---------- layout shell ---------- */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  /* ---------- nav ---------- */
+  header.site{
+    position:sticky;top:0;z-index:40;
+    background:rgba(251,250,248,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    height:68px;
+  }
+  .nav .mark{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1.05rem;
+    color:var(--navy-900);
+  }
+  .nav .mark svg{width:26px;height:26px;flex-shrink:0;}
+  .nav ul{list-style:none;display:flex;gap:32px;margin:0;padding:0;}
+  .nav a.navlink{
+    font-size:0.92rem;font-weight:600;color:var(--navy-700);
+    text-decoration:none;padding:4px 0;border-bottom:2px solid transparent;
+    transition:border-color .15s ease;
+  }
+  .nav a.navlink:hover{border-color:var(--orange-600);}
+  .nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:6px;}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--navy-900);margin:5px 0;}
+  @media (max-width:720px){
+    .nav ul{display:none;}
+    .nav ul.open{
+      display:flex;flex-direction:column;gap:14px;
+      position:absolute;top:68px;left:0;right:0;
+      background:var(--paper);border-bottom:1px solid var(--line);
+      padding:18px 32px 22px;
+    }
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:96px 0 88px;
+    background:var(--paper);
+  }
+  .blob{position:absolute;pointer-events:none;}
+  .blob.b1{
+    top:-160px;right:-140px;width:520px;height:520px;
+    background:var(--orange-600);
+    border-radius:42% 58% 63% 37% / 41% 44% 56% 59%;
+    opacity:0.95;
+  }
+  .blob.b2{
+    bottom:-330px;left:-230px;width:430px;height:430px;
+    background:var(--navy-900);
+    border-radius:58% 42% 37% 63% / 55% 40% 60% 45%;
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:20px;
+    font-size:0.92rem;font-weight:600;color:var(--navy-700);
+    margin-bottom:26px;
+  }
+  .hero-meta span{display:inline-flex;align-items:center;gap:7px;}
+  .hero-meta svg{width:15px;height:15px;}
+  .hero-title{
+    font-size:clamp(2.4rem, 5.4vw, 4.3rem);
+    line-height:1.04;
+    color:var(--navy-900);
+    max-width:18ch;
+  }
+  .hero-title .accent{color:var(--orange-600);}
+  .hero-kicker{
+    margin-top:22px;
+    font-size:1.08rem;
+    color:var(--grey-600);
+    max-width:46ch;
+    line-height:1.6;
+  }
+  @media (max-width:640px){ .hero{padding:72px 0 64px;} .blob.b1{width:360px;height:360px;top:-140px;right:-160px;} .blob.b2{width:280px;height:280px;bottom:-200px;left:-150px;} }
+
+  /* ---------- session strip ---------- */
+  .sessions{
+    background:var(--navy-900);
+    color:#fff;
+  }
+  .session-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+  }
+  .session-cell{
+    padding:34px 30px;
+    border-left:1px solid rgba(255,255,255,0.14);
+  }
+  .session-cell:first-child{border-left:none;}
+  .session-num{
+    font-family:'Baloo 2',sans-serif;font-weight:700;
+    font-size:0.82rem;color:var(--orange-400);
+    letter-spacing:0.02em;
+    margin-bottom:10px;
+  }
+  .session-cell h3{
+    font-size:1.06rem;font-weight:600;font-family:'Pretendard',sans-serif;
+    line-height:1.45;color:#fff;
+  }
+  @media (max-width:760px){
+    .session-row{grid-template-columns:1fr;}
+    .session-cell{border-left:none;border-top:1px solid rgba(255,255,255,0.14);}
+    .session-cell:first-child{border-top:none;}
+  }
+
+  /* ---------- gallery ---------- */
+  .gallery-section{padding:84px 32px 100px;}
+  @media (max-width:640px){ .gallery-section{padding:56px 20px 72px;} }
+  .gallery-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:24px;flex-wrap:wrap;
+    margin-bottom:36px;
+  }
+  .gallery-head h2{
+    font-size:2rem;color:var(--navy-900);
+  }
+  .gallery-head p{
+    margin:10px 0 0;color:var(--grey-600);font-size:0.98rem;max-width:42ch;
+  }
+  .filters{
+    display:flex;gap:8px;flex-wrap:wrap;
+  }
+  .filters button{
+    font-family:'Pretendard',sans-serif;
+    font-size:0.88rem;font-weight:600;
+    padding:9px 16px;
+    border-radius:999px;
+    border:1px solid var(--grey-300);
+    background:#fff;
+    color:var(--navy-700);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .filters button:hover{border-color:var(--orange-600);}
+  .filters button.active{
+    background:var(--navy-900);
+    border-color:var(--navy-900);
+    color:#fff;
+  }
+
+  .masonry{
+    column-count:4;
+    column-gap:14px;
+  }
+  @media (max-width:1100px){ .masonry{column-count:3;} }
+  @media (max-width:760px){ .masonry{column-count:2;} }
+  @media (max-width:380px){ .masonry{column-count:1;} }
+
+  .tile{
+    break-inside:avoid;
+    margin:0 0 14px;
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:#fff;
+    border:1px solid var(--line);
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .tile:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(16,29,71,0.12);}
+  .tile img{width:100%;height:auto;background:var(--cream);}
+  .tile figcaption{
+    padding:13px 15px 15px;
+    font-size:0.86rem;color:var(--grey-600);
+  }
+  .tile figcaption .tag{
+    display:block;
+    font-family:'Baloo 2',sans-serif;font-weight:600;
+    font-size:0.76rem;color:var(--orange-600);
+    margin-bottom:4px;
+  }
+  .tile{position:relative;}
+  .tile .count-badge{
+    position:absolute;top:10px;right:10px;
+    background:rgba(16,29,71,0.78);
+    color:#fff;
+    font-size:0.78rem;font-weight:600;
+    padding:4px 9px;
+    border-radius:999px;
+    display:flex;align-items:center;gap:5px;
+  }
+  .tile .count-badge svg{width:13px;height:13px;}
+
+  .empty-note{
+    grid-column:1/-1;
+    padding:20px 0;
+    color:var(--grey-600);
+    font-size:0.92rem;
+  }
+
+  /* ---------- lightbox ---------- */
+  .lightbox{
+    position:fixed;inset:0;
+    background:rgba(16,20,40,0.88);
+    display:none;
+    align-items:center;justify-content:center;
+    z-index:100;
+    padding:32px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox-inner{
+    max-width:880px;width:100%;
+    background:var(--paper);
+    border-radius:4px;
+    overflow:hidden;
+    position:relative;
+  }
+  .lightbox-inner img{width:100%;max-height:74vh;object-fit:contain;background:#0d1330;}
+  .lightbox-cap{
+    padding:18px 24px 22px;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+  }
+  .lightbox-cap .tag{
+    font-family:'Baloo 2',sans-serif;font-weight:600;color:var(--orange-600);font-size:0.8rem;
+    display:block;margin-bottom:4px;
+  }
+  .lightbox-cap p{margin:0;color:var(--grey-600);font-size:0.94rem;}
+  .lightbox-close{
+    background:none;border:0;cursor:pointer;
+    font-size:1.4rem;line-height:1;color:var(--navy-900);
+    padding:4px 6px;
+  }
+  .lightbox-nav{
+    position:absolute;top:0;bottom:0;
+    width:64px;
+    background:none;border:0;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;
+    transition:background .15s ease;
+  }
+  .lightbox-nav:hover{background:rgba(16,29,71,0.18);}
+  .lightbox-nav svg{width:26px;height:26px;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.5));}
+  .lightbox-nav.prev{left:0;}
+  .lightbox-nav.next{right:0;}
+  .lightbox-counter{
+    position:absolute;top:14px;left:16px;
+    background:rgba(16,29,71,0.7);color:#fff;
+    font-size:0.78rem;font-weight:600;
+    padding:4px 10px;border-radius:999px;
+  }
+
+  /* ---------- footer ---------- */
+  footer.site{
+    background:var(--navy-900);
+    color:#fff;
+    padding:56px 0 34px;
+  }
+  .footer-top{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;
+    padding-bottom:36px;
+    border-bottom:1px solid rgba(255,255,255,0.14);
+  }
+  .footer-top h3{font-size:1.2rem;max-width:26ch;line-height:1.4;}
+  .footer-contact{font-size:0.92rem;color:rgba(255,255,255,0.72);line-height:1.8;}
+  .footer-contact a{text-decoration:underline;text-underline-offset:3px;}
+  .footer-orgs{
+    display:flex;flex-wrap:wrap;gap:12px 26px;
+    padding-top:26px;
+    font-size:0.84rem;
+    color:rgba(255,255,255,0.55);
+    font-weight:600;
+  }
+  .footer-bottom{
+    padding-top:20px;
+    font-size:0.78rem;
+    color:rgba(255,255,255,0.4);
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <div class="mark">
+      <svg viewBox="0 0 40 40" fill="none"><path d="M8 32 L30 10" stroke="#e8552d" stroke-width="3" stroke-linecap="round"/><path d="M14 8 L34 28" stroke="#101d47" stroke-width="3" stroke-linecap="round"/><circle cx="8" cy="32" r="3" fill="#101d47"/><circle cx="34" cy="28" r="3" fill="#e8552d"/></svg>
+      Next-Gen ECMO Cannulae
+    </div>
+    <ul>
+      <li><a class="navlink" href="#top">Home</a></li>
+      <li><a class="navlink" href="#gallery">Gallery</a></li>
+      <li><a class="navlink" href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="wrap">
+    <div class="hero-meta">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>2026년 9월 12일</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Holiday Inn Hongdae</span>
+    </div>
+    <h1 class="hero-title">Global Forum on <span class="accent">Next-Generation</span> ECMO Cannulae</h1>
+    <p class="hero-kicker">범부처 연구개발과제 · 차세대 ECMO 캐뉼라 개발을 위한 국제 포럼의 순간들을 기록한 갤러리입니다.</p>
+  </div>
+</section>
+
+<section class="sessions" id="program">
+  <div class="wrap session-row">
+    <div class="session-cell">
+      <div class="session-num">Session 1</div>
+      <h3>ECMO Cannulas Today — Global Landscape and Unmet Needs</h3>
+    </div>
+    <div class="session-cell">
+      <div class="session-num">Session 2</div>
+      <h3>Designing the Next-Generation Korean ECMO Cannula</h3>
+    </div>
+    <div class="session-cell">
+      <div class="session-num">Session 3</div>
+      <h3>Round Table — Toward a National Development Roadmap</h3>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section wrap" id="gallery">
+  <div class="gallery-head">
+    <div>
+      <h2>행사 갤러리</h2>
+      <p>세션과 라운드테이블, 단체사진까지 <strong id="gallery-count">0</strong>장의 기록입니다. 사진을 클릭하면 크게 볼 수 있습니다.</p>
+    </div>
+    <div class="filters" id="filters"></div>
+  </div>
+  <div class="masonry" id="masonry"></div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <span class="lightbox-counter" id="lightbox-counter"></span>
+    <img id="lightbox-img" src="" alt="">
+    <button class="lightbox-nav prev" id="lightbox-prev" aria-label="이전 사진"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <button class="lightbox-nav next" id="lightbox-next" aria-label="다음 사진"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="lightbox-cap">
+      <div>
+        <span class="tag" id="lightbox-tag"></span>
+        <p id="lightbox-text"></p>
+      </div>
+      <button class="lightbox-close" id="lightbox-close" aria-label="닫기">&times;</button>
+    </div>
+  </div>
+</div>
+
+<footer class="site" id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+      <h3>Global Forum on Next-Generation ECMO Cannulae</h3>
+      <div class="footer-contact">
+        문의 · cnuhecmo@gmail.com<br>
+        주최 · 전남대학교병원 · 중앙대학교병원 · 아주대학교병원
+      </div>
+    </div>
+    <div class="footer-orgs">
+      <span>BMA</span><span>noanix</span><span>K BIOHEALTH</span><span>Chung-Ang Univ. Hospital</span><span>Chonnam National Univ. Hospital</span><span>Ajou Univ. Hospital</span>
+    </div>
+    <div class="footer-bottom">© 2026 Global Forum on Next-Generation ECMO Cannulae. All photos courtesy of the organizing committee.</div>
+  </div>
+</footer>
+
+<script>
+  // ---- gallery data ----
+  // images/<dir>/<file>  : 원본 해상도 (라이트박스)
+  // thumbs/<dir>/<file>  : 썸네일 (그리드)
+  const scenes = [{"dir":"Session1","tag":"Session 1","title":"세션 1 — Global Landscape and Unmet Needs","photos":[{"f":"Session1_1.jpg","t":"Session1_1.jpg","w":4032,"h":3024},{"f":"Session1_2.jpg","t":"Session1_2.jpg","w":4032,"h":3024},{"f":"Session1_3.jpg","t":"Session1_3.jpg","w":4032,"h":3024},{"f":"Session1_4.jpg","t":"Session1_4.jpg","w":5712,"h":4284},{"f":"Session1_5.jpg","t":"Session1_5.jpg","w":4032,"h":3024},{"f":"Session1_6.jpg","t":"Session1_6.jpg","w":5712,"h":4284},{"f":"Session1_7.jpg","t":"Session1_7.jpg","w":5712,"h":4284},{"f":"Session1_8.jpg","t":"Session1_8.jpg","w":4032,"h":3024},{"f":"Session1_9.jpg","t":"Session1_9.jpg","w":4032,"h":3024},{"f":"Session1_10.jpg","t":"Session1_10.jpg","w":4032,"h":3024},{"f":"Session1_11.jpg","t":"Session1_11.jpg","w":5712,"h":4284},{"f":"Session1_12.jpg","t":"Session1_12.jpg","w":4032,"h":3024},{"f":"Session1_13.jpg","t":"Session1_13.jpg","w":5712,"h":4284},{"f":"Session1_14.jpg","t":"Session1_14.jpg","w":5712,"h":4284},{"f":"Session1_15.jpg","t":"Session1_15.jpg","w":4032,"h":3024},{"f":"Session1_16.jpg","t":"Session1_16.jpg","w":5712,"h":4284},{"f":"Session1_17.jpg","t":"Session1_17.jpg","w":5712,"h":4284},{"f":"Session1_18.jpg","t":"Session1_18.jpg","w":5712,"h":4284},{"f":"Session1_19.jpg","t":"Session1_19.jpg","w":5712,"h":4284},{"f":"Session1_20.jpg","t":"Session1_20.jpg","w":5712,"h":4284},{"f":"Session1_21.jpg","t":"Session1_21.jpg","w":5712,"h":4284},{"f":"Session1_22.jpg","t":"Session1_22.jpg","w":5712,"h":4284},{"f":"Session1_23.jpg","t":"Session1_23.jpg","w":5712,"h":4284},{"f":"Session1_24.jpg","t":"Session1_24.jpg","w":5712,"h":4284},{"f":"Session1_25.jpg","t":"Session1_25.jpg","w":5712,"h":4284},{"f":"Session1_26.jpg","t":"Session1_26.jpg","w":5712,"h":4284},{"f":"Session1_27.jpg","t":"Session1_27.jpg","w":5712,"h":4284}]},{"dir":"Session2","tag":"Session 2","title":"세션 2 — Designing the Next-Generation Korean Cannula","photos":[{"f":"Session2_1.jpg","t":"Session2_1.jpg","w":5712,"h":4284},{"f":"Session2_2.jpg","t":"Session2_2.jpg","w":5712,"h":4284},{"f":"Session2_3.jpg","t":"Session2_3.jpg","w":5712,"h":4284},{"f":"Session2_4.jpg","t":"Session2_4.jpg","w":5712,"h":4284},{"f":"Session2_5.jpg","t":"Session2_5.jpg","w":5712,"h":4284},{"f":"Session2_6.jpg","t":"Session2_6.jpg","w":4032,"h":3024},{"f":"Session2_7.jpg","t":"Session2_7.jpg","w":5712,"h":4284},{"f":"Session2_8.jpg","t":"Session2_8.jpg","w":5712,"h":4284},{"f":"Session2_9.jpg","t":"Session2_9.jpg","w":4032,"h":3024},{"f":"Session2_10.jpg","t":"Session2_10.jpg","w":5712,"h":4284},{"f":"Session2_11.jpg","t":"Session2_11.jpg","w":4032,"h":3024},{"f":"Session2_12.jpg","t":"Session2_12.jpg","w":4032,"h":3024},{"f":"Session2_13.jpg","t":"Session2_13.jpg","w":4032,"h":3024},{"f":"Session2_14.jpg","t":"Session2_14.jpg","w":5712,"h":4284},{"f":"Session2_15.jpg","t":"Session2_15.jpg","w":5712,"h":4284},{"f":"Session2_16.jpg","t":"Session2_16.jpg","w":5712,"h":4284},{"f":"Session2_17.jpg","t":"Session2_17.jpg","w":5712,"h":4284},{"f":"Session2_18.jpg","t":"Session2_18.jpg","w":5712,"h":4284},{"f":"Session2_19.jpg","t":"Session2_19.jpg","w":4000,"h":3000},{"f":"Session2_20.jpg","t":"Session2_20.jpg","w":4000,"h":3000},{"f":"Session2_21.jpg","t":"Session2_21.jpg","w":4000,"h":3000},{"f":"Session2_22.jpg","t":"Session2_22.jpg","w":4000,"h":3000},{"f":"Session2_23.jpg","t":"Session2_23.jpg","w":4000,"h":3000},{"f":"Session2_24.jpg","t":"Session2_24.jpg","w":4000,"h":3000},{"f":"Session2_25.jpg","t":"Session2_25.jpg","w":4000,"h":3000},{"f":"Session2_26.jpg","t":"Session2_26.jpg","w":4000,"h":3000}]},{"dir":"Session3","tag":"Round Table","title":"세션 3 — Round Table Discussion","photos":[{"f":"Session3_1.jpg","t":"Session3_1.jpg","w":5712,"h":4284},{"f":"Session3_2.jpg","t":"Session3_2.jpg","w":5712,"h":4284},{"f":"Session3_3.jpg","t":"Session3_3.jpg","w":5712,"h":4284},{"f":"Session3_4.jpg","t":"Session3_4.jpg","w":4032,"h":3024},{"f":"Session3_5.jpg","t":"Session3_5.jpg","w":5712,"h":4284},{"f":"Session3_6.jpg","t":"Session3_6.jpg","w":5712,"h":4284},{"f":"Session3_7.jpg","t":"Session3_7.jpg","w":5712,"h":4284},{"f":"Session3_8.jpg","t":"Session3_8.jpg","w":1441,"h":1081},{"f":"Session3_9.jpg","t":"Session3_9.jpg","w":1441,"h":1081},{"f":"Session3_10.jpg","t":"Session3_10.jpg","w":4000,"h":3000},{"f":"Session3_11.jpg","t":"Session3_11.jpg","w":4000,"h":3000},{"f":"Session3_12.jpg","t":"Session3_12.jpg","w":4000,"h":3000},{"f":"Session3_13.jpg","t":"Session3_13.jpg","w":4000,"h":3000},{"f":"Session3_14.jpg","t":"Session3_14.jpg","w":4000,"h":3000},{"f":"Session3_15.jpg","t":"Session3_15.jpg","w":4000,"h":3000},{"f":"Session3_16.jpg","t":"Session3_16.jpg","w":3000,"h":4000},{"f":"Session3_17.jpg","t":"Session3_17.jpg","w":4000,"h":3000},{"f":"Session3_18.jpg","t":"Session3_18.jpg","w":4000,"h":3000},{"f":"Session3_19.jpg","t":"Session3_19.jpg","w":4000,"h":3000},{"f":"Session3_20.jpg","t":"Session3_20.jpg","w":3000,"h":4000},{"f":"Session3_21.jpg","t":"Session3_21.jpg","w":3000,"h":4000},{"f":"Session3_22.jpg","t":"Session3_22.jpg","w":3000,"h":4000},{"f":"Session3_23.jpg","t":"Session3_23.jpg","w":4000,"h":3000},{"f":"Session3_24.jpg","t":"Session3_24.jpg","w":4000,"h":3000},{"f":"Session3_25.jpg","t":"Session3_25.jpg","w":3000,"h":4000},{"f":"Session3_26.jpg","t":"Session3_26.jpg","w":4000,"h":3000},{"f":"Session3_27.jpg","t":"Session3_27.jpg","w":4000,"h":3000},{"f":"Session3_28.jpg","t":"Session3_28.jpg","w":4000,"h":3000},{"f":"Session3_29.jpg","t":"Session3_29.jpg","w":4000,"h":3000},{"f":"Session3_30.jpg","t":"Session3_30.jpg","w":4000,"h":3000},{"f":"Session3_31.jpg","t":"Session3_31.jpg","w":4000,"h":2850}]},{"dir":"Group","tag":"단체사진","title":"단체사진 — Organizing Committee & Faculty","photos":[{"f":"Group_1.jpg","t":"Group_1.jpg","w":5712,"h":4284},{"f":"Group_2.jpg","t":"Group_2.jpg","w":5712,"h":4284},{"f":"Group_3.jpg","t":"Group_3.jpg","w":5712,"h":4284},{"f":"Group_4.jpg","t":"Group_4.jpg","w":5712,"h":4284},{"f":"Group_5.jpg","t":"Group_5.jpg","w":4000,"h":3000},{"f":"Group_6.jpg","t":"Group_6.jpg","w":4000,"h":3000},{"f":"Group_7.jpg","t":"Group_7.jpg","w":4000,"h":3000},{"f":"Group_8.jpg","t":"Group_8.jpg","w":4000,"h":3000},{"f":"Group_9.jpg","t":"Group_9.jpg","w":4000,"h":3000},{"f":"Group_10.jpg","t":"Group_10.jpg","w":4000,"h":3000},{"f":"Group_11.jpg","t":"Group_11.jpg","w":4000,"h":3000},{"f":"Group_12.jpg","t":"Group_12.jpg","w":4000,"h":3000}]}];
+
+  const tags = ['All', ...scenes.map(s => s.tag)];
+  const filtersEl = document.getElementById('filters');
+  const masonryEl = document.getElementById('masonry');
+
+  let view = [];
+
+  tags.forEach((tag, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = tag === 'All' ? '전체' : tag;
+    if (i === 0) btn.classList.add('active');
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render(tag);
+    });
+    filtersEl.appendChild(btn);
+  });
+
+  function render(filter){
+    masonryEl.innerHTML = '';
+    const list = filter === 'All' ? scenes : scenes.filter(s => s.tag === filter);
+    view = [];
+    list.forEach(scene => {
+      scene.photos.forEach((p, pi) => {
+        view.push({scene, photo: p, index: pi});
+      });
+    });
+    view.forEach((item, i) => {
+      const {scene, photo, index} = item;
+      const fig = document.createElement('figure');
+      fig.className = 'tile';
+      fig.innerHTML = `<img src="thumbs/${scene.dir}/${photo.t}" alt="${scene.tag} ${index+1}" `
+        + `width="${photo.w}" height="${photo.h}" loading="lazy" decoding="async">`;
+      fig.addEventListener('click', () => openLightbox(i));
+      masonryEl.appendChild(fig);
+    });
+    document.getElementById('gallery-count').textContent = view.length;
+  }
+  render('All');
+
+  const lightbox = document.getElementById('lightbox');
+  let activeIndex = 0;
+
+  function showPhoto(){
+    const {scene, photo, index} = view[activeIndex];
+    const img = document.getElementById('lightbox-img');
+    img.src = `images/${scene.dir}/${photo.f}`;
+    img.alt = `${scene.tag} ${index+1}`;
+    document.getElementById('lightbox-tag').textContent = scene.tag;
+    document.getElementById('lightbox-text').textContent = `${scene.title} · ${index+1} / ${scene.photos.length}`;
+    document.getElementById('lightbox-counter').textContent = `${activeIndex + 1} / ${view.length}`;
+    const multi = view.length > 1;
+    document.getElementById('lightbox-prev').style.display = multi ? 'flex' : 'none';
+    document.getElementById('lightbox-next').style.display = multi ? 'flex' : 'none';
+    // preload neighbours
+    [1, -1].forEach(d => {
+      const n = view[(activeIndex + d + view.length) % view.length];
+      if (n) { const pre = new Image(); pre.src = `images/${n.scene.dir}/${n.photo.f}`; }
+    });
+  }
+  function openLightbox(i){
+    activeIndex = i;
+    showPhoto();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function step(delta){
+    if (!view.length) return;
+    activeIndex = (activeIndex + delta + view.length) % view.length;
+    showPhoto();
+  }
+  document.getElementById('lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); step(-1); });
+  document.getElementById('lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); step(1); });
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+
+  // swipe on touch devices
+  let touchX = null;
+  lightbox.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, {passive:true});
+  lightbox.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+    touchX = null;
+  }, {passive:true});
+
+  document.querySelector('.nav-toggle').addEventListener('click', () => {
+    document.querySelector('.nav ul').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
